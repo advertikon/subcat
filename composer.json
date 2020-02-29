@@ -1,0 +1,9 @@
+{
+    "name": "advertikon/subcat",
+    "description": "Dedicated subcategory  page",
+    "autoload": {
+        "psr-4": {
+            "Advertikon\\Subcat\\": "",
+        }
+    }
+}
