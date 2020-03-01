@@ -2,13 +2,16 @@
 /** @var \Advertikon\Subcat\Block\CategoryContainer $block */
 
 $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$imageHelper = $this->helper(\Magento\Catalog\Helper\Image::class);
+
 echo '<div class="subcat-wrapper">';
 
 foreach ($block->getChildren() as $category) {
-    if ($_imgUrl = $category->getImageUrl()) {
-        $html = <<<HTML
+    $_imgUrl = $category->getImageUrl() ?: $imageHelper->getDefaultPlaceholderUrl('image');
+    $html = <<<HTML
     <div class="subcat-item">
         <a href="{$category->getUrl()}" alt="{$category->getName()}">
+        <div class="subcat-item-title">{$category->getName()}</div>
             <div class="category-image">
                 <img src="{$block->escapeUrl($_imgUrl)}"
                     alt="{$block->escapeHtmlAttr($category->getName())}"
@@ -17,8 +20,7 @@ foreach ($block->getChildren() as $category) {
         </a>
     </div>
 HTML;
-        echo $_helper->categoryAttribute($category, $html, 'image');
-    }
+    echo $_helper->categoryAttribute($category, $html, 'image');
 }
 
 echo '</div>';

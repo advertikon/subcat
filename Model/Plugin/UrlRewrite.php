@@ -13,7 +13,7 @@ class UrlRewrite
 {
     const TARGET_PATH = '/catalog/category/view/';
     const REWRITE_PATH = "test/index/index/";
-    const TARGET_CATEGORY_LEVEL = 2;
+    const TARGET_CATEGORY_LEVEL = 3;
 
     private $actionFactory;
     private $categoryRepository;
