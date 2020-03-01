@@ -1,1 +1,24 @@
-<h1>This is my template, there are many like it, but this one is mine.</h1>
+<?php
+/** @var \Advertikon\Subcat\Block\CategoryContainer $block */
+
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+echo '<div class="subcat-wrapper">';
+
+foreach ($block->getChildren() as $category) {
+    if ($_imgUrl = $category->getImageUrl()) {
+        $html = <<<HTML
+    <div class="subcat-item">
+        <a href="{$category->getUrl()}" alt="{$category->getName()}">
+            <div class="category-image">
+                <img src="{$block->escapeUrl($_imgUrl)}"
+                    alt="{$block->escapeHtmlAttr($category->getName())}"
+                    title="{$block->escapeHtmlAttr($category->getName())}" class="image" />
+            </div>
+        </a>
+    </div>
+HTML;
+        echo $_helper->categoryAttribute($category, $html, 'image');
+    }
+}
+
+echo '</div>';
